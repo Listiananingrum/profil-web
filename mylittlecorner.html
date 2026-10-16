@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Piece of Me | Listi</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    color: #194f83;
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 15% 12%, #fff9 0%, transparent 25%),
+        radial-gradient(ellipse at 85% 30%, #fff8 0%, transparent 24%),
+        linear-gradient(155deg, #65b4f5, #b9e0ff 50%, #edf8ff);
+    overflow-x: hidden;
+}
+
+/* LANGIT DAN AWAN NATURAL */
+.sky {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    width: 230px;
+    height: 65px;
+    border-radius: 100px;
+    background:
+        radial-gradient(ellipse at 25% 70%, #ffffff 0%, #ffffff 30%, transparent 65%),
+        radial-gradient(ellipse at 45% 40%, #ffffff 0%, #f9fdff 45%, transparent 72%),
+        radial-gradient(ellipse at 70% 55%, #ffffff 0%, #edf8ff 48%, transparent 72%);
+    filter: drop-shadow(0 8px 12px #438bc522);
+    opacity: 0.85;
+    animation: float 38s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: radial-gradient(
+        ellipse at 35% 30%,
+        #ffffff 0%,
+        #fafdff 55%,
+        #d9efff 100%
+    );
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 105px;
+    height: 105px;
+    left: 35px;
+    top: -45px;
+}
+
+.cloud::after {
+    width: 135px;
+    height: 125px;
+    left: 95px;
+    top: -60px;
+}
+
+.c1 {
+    top: 16%;
+    left: -280px;
+}
+
+.c2 {
+    top: 48%;
+    left: -320px;
+    animation-delay: -15s;
+    transform: scale(.75);
+}
+
+.c3 {
+    top: 75%;
+    left: -300px;
+    animation-delay: -27s;
+    transform: scale(1.25);
+}
+
+.c4 {
+    top: 30%;
+    left: -250px;
+    animation-delay: -8s;
+    transform: scale(.6);
+}
+
+@keyframes float {
+    from { left: -300px; }
+    to { left: 110%; }
+}
+
+.sunlight {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    top: -180px;
+    right: -100px;
+    border-radius: 50%;
+    background: #fff8;
+    filter: blur(75px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* NAVIGASI */
+header {
+    width: min(1100px, 94%);
+    margin: 22px auto;
+    padding: 13px 22px;
+    border: 1px solid #ffffffaa;
+    border-radius: 25px;
+    background: #ffffff70;
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 30px #387ab018;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: #5a9bd8;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+nav button {
+    background: transparent;
+    border: none;
+    color: #235780;
+    padding: 11px 13px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .25s;
+    font-family: inherit;
+}
+
+nav button:hover,
+nav button.active {
+    background: white;
+    color: #397fbd;
+    box-shadow: 0 4px 12px #477db522;
+}
+
+/* KONTEN HALAMAN */
+main {
+    width: min(950px, 92%);
+    margin: 45px auto;
+    min-height: 460px;
+}
+
+.page {
+    display: none;
+    animation: appear .55s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    padding: 30px;
+    border-radius: 28px;
+    background: #ffffffb8;
+    border: 1px solid #ffffffdd;
+    box-shadow: 0 12px 35px #397db51c;
+    backdrop-filter: blur(10px);
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.15;
+    margin: 12px 0;
+}
+
+h2 {
+    font-size: 28px;
+    margin-top: 5px;
+}
+
+h3 {
+    margin-bottom: 8px;
+}
+
+p {
+    line-height: 1.8;
+}
+
+.subtitle {
+    color: #5487ad;
+    letter-spacing: 1px;
+}
+
+.eyebrow {
+    display: inline-block;
+    background: #e0f1ff;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+/* HOME */
+.hero {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    align-items: center;
+    gap: 30px;
+}
+
+.hero-text {
+    padding: 15px 0;
+}
+
+.hero-image {
+    min-height: 300px;
+    border: 9px solid white;
+    border-radius: 8px 8px 25px 8px;
+    box-shadow: 0 12px 28px #2769a533;
+    background:
+        linear-gradient(180deg, transparent 40%, #28578055),
+        url("listi.jpg")
+        center / cover;
+    transform: rotate(3deg);
+    position: relative;
+}
+
+.hero-image::after {
+    content: "a little piece of my sky ♡";
+    position: absolute;
+    bottom: -38px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: #397db5;
+}
+
+.btn {
+    display: inline-block;
+    background: #448fd0;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 13px 20px;
+    margin: 7px 5px 7px 0;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.btn:hover {
+    background: #276ba9;
+    transform: translateY(-3px);
+}
+
+.btn.light {
+    background: white;
+    color: #347bb8;
+}
+
+/* ABOUT */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.info {
+    padding: 18px;
+    border-radius: 18px;
+    background: #e8f5ff;
+}
+
+.info small {
+    color: #6b9abd;
+}
+
+.info p {
+    margin: 5px 0 0;
+    font-weight: bold;
+}
+
+/* HOBI */
+.hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.hobby {
+    padding: 23px 12px;
+    text-align: center;
+    background: #e7f4ff;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: .3s;
+    border: 2px solid transparent;
+}
+
+.hobby:hover {
+    transform: translateY(-7px) rotate(-1deg);
+    background: white;
+    border-color: #b3dcff;
+}
+
+.hobby .emoji {
+    font-size: 39px;
+}
+
+/* GALLERY */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.photo {
+    padding: 8px 8px 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px #397db51c;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.photo:hover {
+    transform: rotate(-2deg) scale(1.04);
+}
+
+.photo img {
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.photo p {
+    text-align: center;
+    margin: 10px 0 0;
+    font-size: 13px;
+}
+
+/* KONTAK */
+.contact-link {
+    display: block;
+    padding: 18px;
+    margin: 12px 0;
+    background: #eaf6ff;
+    border-radius: 18px;
+    color: #235780;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.contact-link:hover {
+    background: white;
+    transform: translateX(5px);
+}
+
+.quote {
+    text-align: center;
+    font-style: italic;
+    color: #5288b7;
+    font-size: 18px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 24px;
+    color: #326b98;
+    font-size: 13px;
+}
+
+.page-count {
+    text-align: center;
+    color: #4079a8;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 650px) {
+    header {
+        flex-direction: column;
+        padding: 15px 10px;
+    }
+
+    nav button {
+        padding: 9px 10px;
+        font-size: 12px;
+    }
+
+    main {
+        margin: 25px auto;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-image {
+        min-height: 260px;
+        margin: 5px 15px 35px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hobby-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .photo img {
+        height: 115px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LATAR LANGIT -->
+<div class="sky">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    <div class="cloud c4"></div>
+</div>
+<div class="sunlight"></div>
+
+<!-- NAVIGASI -->
+<header>
+    <div class="logo" onclick="showPage('home')">
+        ☁ Listi<span>.</span>
+    </div>
+
+    <nav>
+        <button class="active" onclick="showPage('home', this)">⌂ Home</button>
+        <button onclick="showPage('about', this)">♡ About Me</button>
+        <button onclick="showPage('hobbies', this)">✧ Hobbies</button>
+        <button onclick="showPage('gallery', this)">▧ Gallery</button>
+        <button onclick="showPage('contact', this)">✉ Contact</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HALAMAN 1: HOME -->
+<section class="page active" id="home">
+    <div class="card hero">
+        <div class="hero-text">
+            <span class="eyebrow">☁ WELCOME TO MY LITTLE WORLD</span>
+
+            <h1>Hi, I'm<br>Listiana Ningrum! ♡</h1>
+
+            <p class="subtitle">just a girl with big dreams ✨</p>
+
+            <p>
+                Halo semuanya! Aku Listi, mahasiswa Teknik Logistik
+                yang suka belajar hal baru, menikmati hal sederhana,
+                dan punya banyak mimpi yang ingin diwujudkan.
+            </p>
+
+            <button class="btn" onclick="showPage('about')">
+                Kenalan lebih dekat yuk! →
+            </button>
+
+            <button class="btn light" onclick="showPage('hobbies')">
+                Explore my world ☁
+            </button>
+        </div>
+
+        <div class="hero-image"></div>
+    </div>
+
+    <div class="quote">
+        "Small steps every day lead to big dreams." ♡
+    </div>
+</section>
+
+<!-- HALAMAN 2: ABOUT -->
+<section class="page" id="about">
+    <div class="card">
+        <span class="eyebrow">♡ GET TO KNOW ME</span>
+        <h1>A Little About Me</h1>
+
+        <p>
+            Setiap orang punya ceritanya masing-masing.
+            Ini sedikit cerita tentang aku!
+        </p>
+
+        <div class="info-grid">
+            <div class="info">
+                <small>୨୧ Nama lengkap</small>
+                <p>Listiana Ningrum</p>
+            </div>
+
+            <div class="info">
+                <small>💌 Nama panggilan</small>
+                <p>Listi</p>
+            </div>
+
+            <div class="info">
+                <small>🎓 Jurusan</small>
+                <p>Teknik Logistik</p>
+            </div>
+
+            <div class="info">
+                <small>🏫 Kampus</small>
+                <p>Universitas Pendidikan Indonesia</p>
+            </div>
+
+<div class="info">
+                <small>🍜 Makanan kesukaan</small>
+                <p>Makanan Manis dan Semua yang Berbahan dasar Kentang</p>
+            </div>
+
+            <div class="info">
+                <small>🏙️ Kota asal</small>
+                <p>Purbalingga, Jawa Tengah</p>
+            </div>
+
+            <div class="info">
+                <small>💭 Kepribadian</small>
+                <p>Ambivert</p>
+            </div>
+
+            <div class="info">
+                <small>💙 Warna favorit</small>
+                <p>Biru, of course!</p>
+            </div>
+        </div>
+
+        <h2>☁ A little note</h2>
+        <p>
+            Somewhere between dreams and reality.
+        </p>
+
+        <button class="btn" onclick="showPage('hobbies')">
+            Lihat hal yang aku suka →
+        </button>
+    </div>
+</section>
+
+<!-- HALAMAN 3: HOBBIES -->
+<section class="page" id="hobbies">
+    <div class="card">
+        <span class="eyebrow">✧ THINGS THAT MAKE ME HAPPY</span>
+        <h1>My Little Favorites</h1>
+
+        <p>Klik salah satu kartu di bawah buat lihat favoritku!</p>
+
+        <div class="hobby-grid">
+            <div class="hobby" onclick="love('🎧', 'K-Pop & R&B', 'Lagu Favorit: Rains in Heaven — NCT DREAM, Journey Mercies — Mark Lee, Forever Only — Jaehyun, Hope Not — BLACKPINK, Dream — BABYMONSTER, Pelangi — HIVI!, Danger — TREASURE')">
+                <div class="emoji">🎧</div>
+                <h3>Music</h3>
+                <small>K-Pop & R&B</small>
+            </div>
+
+            <div class="hobby" onclick="love('🌿', 'Nature', 'Aku suka suasana alam yang tenang, udara segar, dan pemandangan hijau.')">
+                <div class="emoji">🌿</div>
+                <h3>Nature</h3>
+                <small>Peaceful moments</small>
+            </div>
+
+            <div class="hobby" onclick="love('✈️', 'Traveling', 'Menjelajahi tempat baru selalu punya cerita dan pengalaman menarik.')">
+                <div class="emoji">✈️</div>
+                <h3>Traveling</h3>
+                <small>New adventures</small>
+            </div>
+
+            <div class="hobby" onclick="love('📚', 'Learning', 'Belajar hal baru bikin aku punya kesempatan untuk terus berkembang.')">
+                <div class="emoji">📚</div>
+                <h3>Learning</h3>
+                <small>Grow every day</small>
+            </div>
+
+            <div class="hobby" onclick="love('💙', 'Blue Things', 'Biru mengingatkanku pada langit luas dan perasaan yang tenang.')">
+                <div class="emoji">💙</div>
+                <h3>Blue Things</h3>
+                <small>My comfort color</small>
+            </div>
+
+            <div class="hobby" onclick="love('☁️', 'Simple Things', 'Hal kecil seperti langit cantik dan obrolan hangat juga bisa bikin bahagia.')">
+                <div class="emoji">☁️</div>
+                <h3>Simple Things</h3>
+                <small>Little happiness</small>
+            </div>
+        </div>
+
+        <div id="love-note" class="info" style="display:none; margin-top:20px;">
+            <h2 id="love-title"></h2>
+            <p id="love-desc"></p>
+            <button class="btn light" onclick="closeLove()">Tutup ♡</button>
+        </div>
+
+        <button class="btn" onclick="showPage('gallery')">
+            Lanjut ke gallery →
+        </button>
+    </div>
+</section>
+
+<!-- HALAMAN 4: GALLERY -->
+<section class="page" id="gallery">
+    <div class="card">
+        <span class="eyebrow">📸 LITTLE MOMENTS</span>
+        <h1>My Sky Gallery</h1>
+
+        <p>
+            Beberapa pemandangan dan suasana yang cocok
+            banget sama vibes little sky-ku.
+        </p>
+
+        <div class="gallery-grid">
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="1.jpg">
+                <p>Somewhere new ✈</p>
+            </div>
+
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="2.jpg">
+                <p>Golden hour ☀</p>
+            </div>
+
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="3.jpg">
+                <p>Slow mornings 🌄</p>
+            </div>
+
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="4.jpg">
+                <p>Nature escape 🌿</p>
+            </div>
+
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="5.jpg">
+                <p>City View 🏙️</p>
+            </div>
+
+            <div class="photo" onclick="openPhoto(this)">
+                <img src="6.jpg">
+                <p>A Little Sky ☁</p>
+            </div>
+        </div>
+
+        <p class="subtitle" style="text-align:center;">
+            Psst... klik fotonya untuk melihat lebih dekat! ♡
+        </p>
+    </div>
+</section>
+
+<!-- HALAMAN 5: CONTACT -->
+<section class="page" id="contact">
+    <div class="card">
+        <span class="eyebrow">💌 SAY HELLO</span>
+        <h1>Let's Be Friends!</h1>
+
+        <p>
+            Makasih sudah mampir ke little corner-ku.
+            Semoga harimu menyenangkan, ya!
+        </p>
+
+        <a class="contact-link"
+           href="https://instagram.com/listiianangrm?vrfl=MTY3MzBqMnlzM3Jsag%3D%3D">
+           📷 &nbsp; Instagram <br>
+           <small>Yuk, connect di Instagram!</small>
+        </a>
+
+        <a class="contact-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=listiananingrum13@gmail.com">
+           ✉ &nbsp; Email <br>
+           <small>Kirim pesan lewat email</small>
+        </a>
+
+        <div class="info">
+            <h3>☁ My little reminder</h3>
+            <p class="quote">
+                "You don't have to bloom at the same time
+                as everyone else."
+            </p>
+        </div>
+
+        <button class="btn" onclick="showPage('home')">
+            ↶ Back to Home
+        </button>
+    </div>
+</section>
+
+<div class="page-count" id="page-count">
+    Page 1 of 5 · keep exploring ☁
+</div>
+
+</main>
+
+<footer>
+    Made with 💙 by Listi · 2026
+    <p>Take your time, enjoy the little things ☁️</p>
+</footer>
+
+<!-- POPUP FOTO -->
+<div id="photo-modal"
+     onclick="this.style.display='none'"
+     style="display:none; position:fixed; inset:0;
+     background:#153a60dd; z-index:10; padding:25px;
+     align-items:center; justify-content:center; cursor:pointer;">
+
+    <div style="background:white; padding:12px; border-radius:15px;
+    width:min(500px,95%); text-align:center;">
+        <img id="big-photo" src="" alt="Foto pilihan"
+             style="width:100%; max-height:65vh; object-fit:contain;
+             border-radius:8px;">
+        <p id="photo-caption"></p>
+        <small>Klik di mana saja untuk menutup ♡</small>
+    </div>
+</div>
+
+<script>
+const pageNames = ["home", "about", "hobbies", "gallery", "contact"];
+
+function showPage(name, button) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+    document.getElementById(name).classList.add("active");
+
+    document.querySelectorAll("nav button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    if (button) {
+        button.classList.add("active");
+    } else {
+        document.querySelectorAll("nav button").forEach(btn => {
+            if (btn.getAttribute("onclick").includes("'" + name + "'")) {
+                btn.classList.add("active");
+            }
+        });
+    }
+
+    const index = pageNames.indexOf(name);
+    document.getElementById("page-count").textContent =
+        "Page " + (index + 1) + " of 5 · keep exploring ☁";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function love(emoji, title, description) {
+    document.getElementById("love-note").style.display = "block";
+    document.getElementById("love-title").textContent = emoji + " " + title;
+    document.getElementById("love-desc").textContent = description;
+}
+
+function closeLove() {
+    document.getElementById("love-note").style.display = "none";
+}
+
+function openPhoto(element) {
+    const img = element.querySelector("img");
+
+    document.getElementById("big-photo").src = img.src;
+    document.getElementById("photo-caption").textContent =
+        element.querySelector("p").textContent;
+
+    document.getElementById("photo-modal").style.display = "flex";
+}
+</script>
+
+</body>
+</html>
